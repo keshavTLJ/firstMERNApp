@@ -18,15 +18,17 @@ main().catch(err => console.log(err));
 server.use(cors());
 server.use(express.json());
 
+//API routes
+server.use('/products', productRouter);
+
 //serving static files
 server.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)));
 
-//router middleware
-server.use('/products', productRouter);
+//Handle React routing, return all requests to React app
 server.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/dist/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
 })
 
-server.listen(process.env.PORT, () => {
+server.listen(process.env.PORT || 8080, () => {
   console.log("server started")
 });
