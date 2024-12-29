@@ -22,7 +22,7 @@ server.use(express.json());
 server.use('/products', productRouter);
 
 //serving static files
-server.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)));
+server.use(express.static(path.join(__dirname, 'public', 'dist')));
 
 //Handle React routing, return all requests to React app
 server.use('*', (req, res) => {
